@@ -3,6 +3,11 @@ import jwt from "jsonwebtoken";
 
 const SECRET = process.env.SECRET || "";
 
+export interface AuthRequest extends Request {
+  userId?: number;
+}
+
+
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({error: "Token ausente ou inválido."});

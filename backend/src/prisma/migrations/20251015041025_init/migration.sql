@@ -14,7 +14,6 @@ CREATE TABLE "Task" (
     "status" TEXT NOT NULL DEFAULT 'pendente',
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "completedAt" DATETIME,
-    "completed" BOOLEAN NOT NULL DEFAULT false,
     "userId" INTEGER NOT NULL,
     CONSTRAINT "Task_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
