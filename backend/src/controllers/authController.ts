@@ -11,6 +11,14 @@ const SECRET = process.env.SECRET || "";
 export const signup = async (req: Request, res: Response) => {
   try{
     const {name, email, password } = req.body;
+    
+    if  (!name || !email || !password) {
+      return res.status(400).json({error:"Nome, email e senha são obrigatórios."});
+    }
+
+    const existingUser = await prisma.user.findUnique({where:{email}});
+    if(existingUser) return res.status(400).json({error:"Email já cadastrado."});
+
     const hashed = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({data:{name,email,password:hashed}});
