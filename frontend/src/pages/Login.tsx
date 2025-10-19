@@ -11,10 +11,11 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try{
-      const res = await api.post("/auth/login", { email, password });
+      const res = await api.post("/auth/signin", { email, password });
       localStorage.setItem("token", res.data.token);
-      navigate("/");
+     
     }catch(e){
+      console.log(e)
       setError("Credenciais inválidas");
     }
   }
